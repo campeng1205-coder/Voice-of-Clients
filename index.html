@@ -1,0 +1,674 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>お客様の声 | インナーチャイルドカウンセリング</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Noto+Sans+JP:wght@200;300;400&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg:        #f7f7fb;
+      --bg2:       #efeff7;
+      --surface:   #ffffff;
+      --lavender:  #c4c8e8;
+      --lavender2: #9da3d4;
+      --warm:      #f5ede0;
+      --warm2:     #e8c9a8;
+      --text:      #2e2e3a;
+      --text-light:#6a6a80;
+      --border:    rgba(180,185,220,0.3);
+      --shadow:    rgba(160,165,210,0.12);
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Noto Sans JP', sans-serif;
+      font-weight: 400;
+      font-size: 14px;
+      line-height: 1.9;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ─── Hero ─── */
+    .hero {
+      position: relative;
+      padding: 80px 24px 72px;
+      text-align: center;
+      overflow: hidden;
+      background: linear-gradient(170deg,
+        #ffffff 0%,
+        #f0f1f9 40%,
+        #e8eaf5 80%,
+        #f0ede8 100%
+      );
+    }
+    /* ぼかした光の玉 */
+    .hero::before {
+      content: '';
+      position: absolute;
+      width: 320px; height: 320px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(245,237,224,0.7) 0%, transparent 70%);
+      top: -80px; right: -60px;
+      pointer-events: none;
+    }
+    .hero::after {
+      content: '';
+      position: absolute;
+      width: 260px; height: 260px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(196,200,232,0.4) 0%, transparent 70%);
+      bottom: -60px; left: -40px;
+      pointer-events: none;
+    }
+    .hero-inner { position: relative; z-index: 1; }
+
+    .eyebrow {
+      font-family: 'Cormorant Garamond', serif;
+      font-style: italic;
+      font-size: 14px;
+      letter-spacing: 0.18em;
+      color: var(--lavender2);
+      margin-bottom: 18px;
+    }
+    .hero h1 {
+      font-family: 'Cormorant Garamond', serif;
+      font-weight: 400;
+      font-size: 36px;
+      letter-spacing: 0.18em;
+      color: #3a3a50;
+      line-height: 1.4;
+      margin-bottom: 14px;
+    }
+    .hero-line {
+      display: inline-block;
+      width: 36px;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, var(--lavender2), transparent);
+      margin: 6px auto 18px;
+    }
+    .hero p {
+      font-size: 12px;
+      color: #707088;
+      letter-spacing: 0.12em;
+      line-height: 2.2;
+    }
+    .hero-stats {
+      display: flex;
+      justify-content: center;
+      gap: 0;
+      margin-top: 36px;
+    }
+    .stat {
+      padding: 0 24px;
+      text-align: center;
+    }
+    .stat + .stat { border-left: 1px solid var(--border); }
+    .stat-num {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 30px;
+      font-weight: 300;
+      color: var(--lavender2);
+      display: block;
+      line-height: 1;
+    }
+    .stat-label {
+      font-size: 10px;
+      color: var(--text-light);
+      letter-spacing: 0.1em;
+      margin-top: 5px;
+      display: block;
+    }
+
+    /* ─── Filter ─── */
+    .filter-section {
+      padding: 36px 20px 0;
+      text-align: center;
+    }
+    .filter-label {
+      font-family: 'Cormorant Garamond', serif;
+      font-style: italic;
+      font-size: 13px;
+      letter-spacing: 0.14em;
+      color: var(--text-light);
+      margin-bottom: 14px;
+    }
+    .filters {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      justify-content: center;
+    }
+    .filter-btn {
+      background: #ffffff;
+      border: 1.5px solid #b0b6d8;
+      border-radius: 20px;
+      padding: 7px 20px;
+      font-size: 12px;
+      font-family: 'Noto Sans JP', sans-serif;
+      font-weight: 400;
+      letter-spacing: 0.1em;
+      color: #5a5a78;
+      cursor: pointer;
+      transition: all 0.25s;
+      box-shadow: 0 1px 4px rgba(160,165,210,0.15);
+    }
+    .filter-btn.active, .filter-btn:hover {
+      background: var(--lavender2);
+      border-color: var(--lavender2);
+      color: #fff;
+      box-shadow: 0 3px 10px rgba(157,163,212,0.35);
+    }
+
+    /* ─── Cards ─── */
+    .cards {
+      padding: 32px 18px 56px;
+      max-width: 620px;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    .card {
+      background: rgba(255,255,255,0.85);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 30px 28px 24px;
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      box-shadow: 0 2px 20px var(--shadow);
+      transition: transform 0.3s, box-shadow 0.3s;
+    }
+    .card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 10px 40px rgba(160,165,210,0.2);
+    }
+
+    .card-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 20px;
+    }
+    .profile {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .avatar-circle {
+      width: 42px;
+      height: 42px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #eceef8, #f5f0ea);
+      border: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      overflow: hidden;
+    }
+    .avatar-circle svg {
+      width: 26px;
+      height: 26px;
+    }
+    .profile-name {
+      font-size: 13px;
+      font-weight: 500;
+      letter-spacing: 0.08em;
+      color: #2e2e3a;
+    }
+    .profile-attr {
+      font-size: 11px;
+      color: var(--text-light);
+      letter-spacing: 0.1em;
+      margin-top: 2px;
+    }
+    .stars {
+      font-size: 11px;
+      color: var(--lavender);
+      letter-spacing: 2px;
+    }
+
+    .sep {
+      width: 100%;
+      height: 1px;
+      background: linear-gradient(90deg, var(--border), transparent);
+      margin-bottom: 20px;
+    }
+
+    .big-quote {
+      font-family: 'Cormorant Garamond', serif;
+      font-style: italic;
+      font-size: 56px;
+      line-height: 0.6;
+      color: var(--lavender);
+      opacity: 0.4;
+      margin-bottom: 10px;
+      user-select: none;
+    }
+
+    .highlight-text {
+      font-size: 15px;
+      font-weight: 500;
+      color: #2e2e3a;
+      line-height: 1.85;
+      letter-spacing: 0.03em;
+      margin-bottom: 14px;
+    }
+
+    .body-text {
+      font-size: 13px;
+      color: #52526a;
+      line-height: 2;
+      font-weight: 400;
+    }
+
+    .toggle-btn {
+      background: none;
+      border: none;
+      font-size: 11px;
+      font-family: 'Noto Sans JP', sans-serif;
+      font-weight: 300;
+      color: var(--lavender2);
+      cursor: pointer;
+      padding: 8px 0 0;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      letter-spacing: 0.1em;
+      transition: opacity 0.2s;
+    }
+    .toggle-btn:hover { opacity: 0.7; }
+    .toggle-btn::after {
+      content: '∨';
+      font-size: 10px;
+      transition: transform 0.2s;
+    }
+    .toggle-btn.open::after { transform: rotate(180deg); }
+
+    .detail-text {
+      font-size: 13px;
+      color: #5a5a72;
+      line-height: 2;
+      font-weight: 400;
+      margin-top: 14px;
+      padding-top: 14px;
+      border-top: 1px solid var(--border);
+    }
+
+    .hidden { display: none !important; }
+
+    /* ─── CTA ─── */
+    .cta-section {
+      position: relative;
+      overflow: hidden;
+      padding: 68px 24px;
+      text-align: center;
+      background: linear-gradient(160deg,
+        #eceef8 0%,
+        #f0ede8 50%,
+        #e8eaf5 100%
+      );
+    }
+    .cta-section::before {
+      content: '';
+      position: absolute;
+      width: 300px; height: 300px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(245,237,224,0.6) 0%, transparent 70%);
+      top: -80px; left: -60px;
+    }
+    .cta-section::after {
+      content: '';
+      position: absolute;
+      width: 250px; height: 250px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(196,200,232,0.5) 0%, transparent 70%);
+      bottom: -60px; right: -40px;
+    }
+    .cta-inner { position: relative; z-index: 1; }
+
+    .cta-eyebrow {
+      font-family: 'Cormorant Garamond', serif;
+      font-style: italic;
+      font-size: 13px;
+      letter-spacing: 0.18em;
+      color: var(--lavender2);
+      margin-bottom: 14px;
+    }
+    .cta-section h2 {
+      font-family: 'Cormorant Garamond', serif;
+      font-weight: 300;
+      font-size: 26px;
+      letter-spacing: 0.12em;
+      color: #5a5a72;
+      margin-bottom: 10px;
+      line-height: 1.6;
+    }
+    .cta-section p {
+      font-size: 12px;
+      color: var(--text-light);
+      margin-bottom: 32px;
+      line-height: 2.2;
+      letter-spacing: 0.06em;
+    }
+    .cta-btn {
+      display: inline-block;
+      background: #ffffff;
+      color: #5a5a78;
+      font-weight: 500;
+      font-size: 14px;
+      letter-spacing: 0.14em;
+      padding: 16px 52px;
+      border-radius: 30px;
+      text-decoration: none;
+      box-shadow: 0 6px 24px rgba(100,100,140,0.25);
+      transition: transform 0.25s, box-shadow 0.25s, background 0.25s, color 0.25s;
+      border: none;
+    }
+    .cta-btn:hover {
+      background: #f0f0fa;
+      transform: translateY(-3px);
+      box-shadow: 0 10px 32px rgba(100,100,140,0.3);
+    }
+
+    /* ─── Footer ─── */
+    footer {
+      text-align: center;
+      padding: 24px 20px;
+      font-size: 10px;
+      color: var(--text-light);
+      letter-spacing: 0.1em;
+      border-top: 1px solid var(--border);
+    }
+  </style>
+</head>
+<body>
+
+<!-- Hero -->
+<div class="hero">
+  <div class="hero-inner">
+    <p class="eyebrow">Voice of Clients</p>
+    <h1>お客様の声</h1>
+    <div class="hero-line"></div>
+    <p>カウンセリングを体験された方の<br>リアルな感想をご紹介します</p>
+    <div class="hero-stats">
+      <div class="stat">
+        <span class="stat-num">11</span>
+        <span class="stat-label">掲載件数</span>
+      </div>
+      <div class="stat">
+        <span class="stat-num">20〜50</span>
+        <span class="stat-label">年代</span>
+      </div>
+      <div class="stat">
+        <span class="stat-num">4.9</span>
+        <span class="stat-label">平均評価 / 5.0</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Filter -->
+<div class="filter-section">
+  <p class="filter-label">Filter by Age</p>
+  <div class="filters">
+    <button class="filter-btn active" onclick="filter('all', this)">すべて</button>
+    <button class="filter-btn" onclick="filter('20', this)">20代</button>
+    <button class="filter-btn" onclick="filter('30', this)">30代</button>
+    <button class="filter-btn" onclick="filter('40', this)">40代</button>
+    <button class="filter-btn" onclick="filter('50', this)">50代</button>
+  </div>
+</div>
+
+<!-- Cards -->
+<div class="cards" id="cards">
+
+  <!-- H.K / 20代男性 -->
+  <div class="card" data-age="20">
+    <div class="card-header">
+      <div class="profile">
+        <div class="avatar-circle"><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><circle cx="12" cy="7.5" r="4" fill="#9da3d4"/><path d="M4 21c0-4.4 3.6-8 8-8s8 3.6 8 8z" fill="#9da3d4"/></svg></div>
+        <div>
+          <div class="profile-name">H.K さん</div>
+          <div class="profile-attr">20代・男性</div>
+        </div>
+      </div>
+      <div class="stars">★★★★★</div>
+    </div>
+    <div class="sep"></div>
+    <div class="big-quote">"</div>
+    <p class="highlight-text">子供の時の自分に会いに行って対話する体験が、とても不思議で、でも温かくて幸せな体験でした。</p>
+    <p class="body-text">瞑想誘導がとてもお上手で、すんなりイメージすることができました。過去の経験を深掘っていく際にも優しいお言葉をかけてくださり、とても満足感でいっぱいです。また機会があれば参加したいと思える体験でした。</p>
+  </div>
+
+  <!-- T.M / 20代女性 -->
+  <div class="card" data-age="20">
+    <div class="card-header">
+      <div class="profile">
+        <div class="avatar-circle"><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><circle cx="12" cy="7.5" r="4" fill="#c4a0c8"/><path d="M4 21c0-4.4 3.6-8 8-8s8 3.6 8 8z" fill="#c4a0c8"/></svg></div>
+        <div>
+          <div class="profile-name">T.M さん</div>
+          <div class="profile-attr">20代・女性</div>
+        </div>
+      </div>
+      <div class="stars">★★★★★</div>
+    </div>
+    <div class="sep"></div>
+    <div class="big-quote">"</div>
+    <p class="highlight-text">自分本意で生きて良いと思えるきっかけになりました。</p>
+    <p class="body-text">今の思考の癖は幼少期の経験から来ていることが多いのかもしれないと感じました。今はもう昔の環境ではなく、自分本意で生きて良いと思えるきっかけになりました。</p>
+  </div>
+
+  <!-- K.T / 30代男性 -->
+  <div class="card" data-age="30">
+    <div class="card-header">
+      <div class="profile">
+        <div class="avatar-circle"><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><circle cx="12" cy="7.5" r="4" fill="#9da3d4"/><path d="M4 21c0-4.4 3.6-8 8-8s8 3.6 8 8z" fill="#9da3d4"/></svg></div>
+        <div>
+          <div class="profile-name">K.T さん</div>
+          <div class="profile-attr">30代・男性</div>
+        </div>
+      </div>
+      <div class="stars">★★★★★</div>
+    </div>
+    <div class="sep"></div>
+    <div class="big-quote">"</div>
+    <p class="highlight-text">頭ではわかっていることを、心で理解できた気がしました。</p>
+  </div>
+
+  <!-- I.D / 30代男性 -->
+  <div class="card" data-age="30">
+    <div class="card-header">
+      <div class="profile">
+        <div class="avatar-circle"><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><circle cx="12" cy="7.5" r="4" fill="#9da3d4"/><path d="M4 21c0-4.4 3.6-8 8-8s8 3.6 8 8z" fill="#9da3d4"/></svg></div>
+        <div>
+          <div class="profile-name">I.D さん</div>
+          <div class="profile-attr">30代・男性</div>
+        </div>
+      </div>
+      <div class="stars">★★★★★</div>
+    </div>
+    <div class="sep"></div>
+    <div class="big-quote">"</div>
+    <p class="highlight-text">今まで自分でも気づかなかったような、深い部分の気持ちと向き合うことができました。</p>
+    <p class="body-text">カウンセリングの中で自分の過去の経験から湧き起こった感情を吐露することで、これまで気づかなかったような想いと向き合うことができました。</p>
+  </div>
+
+  <!-- O.T / 30代男性 -->
+  <div class="card" data-age="30">
+    <div class="card-header">
+      <div class="profile">
+        <div class="avatar-circle"><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><circle cx="12" cy="7.5" r="4" fill="#9da3d4"/><path d="M4 21c0-4.4 3.6-8 8-8s8 3.6 8 8z" fill="#9da3d4"/></svg></div>
+        <div>
+          <div class="profile-name">O.T さん</div>
+          <div class="profile-attr">30代・男性</div>
+        </div>
+      </div>
+      <div class="stars">★★★★★</div>
+    </div>
+    <div class="sep"></div>
+    <div class="big-quote">"</div>
+    <p class="highlight-text">自分の本質と直接会話した感じがあります。</p>
+    <p class="body-text">過去の自分を引きずっているので、まずは自分を自分で抱きしめてあげたいと率直に思いました。このような思いに1人では絶対に落とし込めないと思いますので、とても貴重なお時間をいただきました。</p>
+  </div>
+
+  <!-- S.M / 30代女性 -->
+  <div class="card" data-age="30">
+    <div class="card-header">
+      <div class="profile">
+        <div class="avatar-circle"><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><circle cx="12" cy="7.5" r="4" fill="#c4a0c8"/><path d="M4 21c0-4.4 3.6-8 8-8s8 3.6 8 8z" fill="#c4a0c8"/></svg></div>
+        <div>
+          <div class="profile-name">S.M さん</div>
+          <div class="profile-attr">30代・女性</div>
+        </div>
+      </div>
+      <div class="stars">★★★★★</div>
+    </div>
+    <div class="sep"></div>
+    <div class="big-quote">"</div>
+    <p class="highlight-text">インナーチャイルドとの対話で自然と涙が溢れ、過去と現在の自分が静かに癒されていくのを感じました。</p>
+    <p class="body-text">自分の潜在意識と深く向き合う機会を頂けて、非常に有意義な時間でした。これを繰り返していくことで、がんじがらめになっている価値観や心が少しずつ解かれていくのだと思いました。</p>
+  </div>
+
+  <!-- I.H / 30代女性 -->
+  <div class="card" data-age="30">
+    <div class="card-header">
+      <div class="profile">
+        <div class="avatar-circle"><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><circle cx="12" cy="7.5" r="4" fill="#c4a0c8"/><path d="M4 21c0-4.4 3.6-8 8-8s8 3.6 8 8z" fill="#c4a0c8"/></svg></div>
+        <div>
+          <div class="profile-name">I.H さん</div>
+          <div class="profile-attr">30代・女性</div>
+        </div>
+      </div>
+      <div class="stars">★★★★★</div>
+    </div>
+    <div class="sep"></div>
+    <div class="big-quote">"</div>
+    <p class="highlight-text">カウンセリング後の1週間で、ずっとモヤモヤしていた悩みが晴れました。</p>
+    <p class="body-text">インナーチャイルドに初めて会うことができ、私の中には人の目を気にしない元気な女の子がいるんだなと安心しました。いつも自信がなく不安で周りの目を気にしてばかりでしたが、私は弱いわけじゃない、でも強くなくてもいい、ということもわかりました。</p>
+    <button class="toggle-btn" onclick="toggleDetail(this)">続きを読む</button>
+    <div class="detail-text hidden">あいさんの全部○にしてくれるような話し方に、カウンセリングが始まってから何だかすでに泣きそうになっていました。「○○なりたい」という気持ちは置いといて、今楽しいと思うことをやって、そんな自分を大切にしていきます。たくさん質問もさせていただき、とっても有意義な素敵な時間を過ごさせていただきました。</div>
+  </div>
+
+  <!-- T.M / 40代女性 -->
+  <div class="card" data-age="40">
+    <div class="card-header">
+      <div class="profile">
+        <div class="avatar-circle"><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><circle cx="12" cy="7.5" r="4" fill="#c4a0c8"/><path d="M4 21c0-4.4 3.6-8 8-8s8 3.6 8 8z" fill="#c4a0c8"/></svg></div>
+        <div>
+          <div class="profile-name">T.M さん</div>
+          <div class="profile-attr">40代・女性</div>
+        </div>
+      </div>
+      <div class="stars">★★★★★</div>
+    </div>
+    <div class="sep"></div>
+    <div class="big-quote">"</div>
+    <p class="highlight-text">途中から涙が止まらなくなりました。自分でも気づかなかった「根源」が垣間見えた瞬間でした。</p>
+    <p class="body-text">できないことで自分を責めてしまい自己嫌悪になってしまう根源が垣間見えた時に、そんな自分もちゃんと認めていきたいなと思えました。無理に強くなろうとせず、どんな自分とでも向き合っていけたらいいなと思います。</p>
+  </div>
+
+  <!-- A.K / 40代女性 -->
+  <div class="card" data-age="40">
+    <div class="card-header">
+      <div class="profile">
+        <div class="avatar-circle"><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><circle cx="12" cy="7.5" r="4" fill="#c4a0c8"/><path d="M4 21c0-4.4 3.6-8 8-8s8 3.6 8 8z" fill="#c4a0c8"/></svg></div>
+        <div>
+          <div class="profile-name">A.K さん</div>
+          <div class="profile-attr">40代・女性</div>
+        </div>
+      </div>
+      <div class="stars">★★★★★</div>
+    </div>
+    <div class="sep"></div>
+    <div class="big-quote">"</div>
+    <p class="highlight-text">自分の悩みに向き合ったり、幼少期を見つめ直したりするとても良い機会になりました。</p>
+    <p class="body-text">あいさんの人柄で「この人なら自分の内側を見せても大丈夫」と思えたことが大きかったです。</p>
+  </div>
+
+  <!-- F.A / 40代女性 -->
+  <div class="card" data-age="40">
+    <div class="card-header">
+      <div class="profile">
+        <div class="avatar-circle"><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><circle cx="12" cy="7.5" r="4" fill="#c4a0c8"/><path d="M4 21c0-4.4 3.6-8 8-8s8 3.6 8 8z" fill="#c4a0c8"/></svg></div>
+        <div>
+          <div class="profile-name">F.A さん</div>
+          <div class="profile-attr">40代・女性</div>
+        </div>
+      </div>
+      <div class="stars">★★★★★</div>
+    </div>
+    <div class="sep"></div>
+    <div class="big-quote">"</div>
+    <p class="highlight-text">心が軽くなりました。</p>
+    <p class="body-text">これまでモヤモヤしていたけど、どうすることも出来なかった。でもカウンセリングを受けて「自分の思いを言葉に出すこと」「今のままの自分で良いこと」「感情の土台を作ること」を得ることができました。</p>
+  </div>
+
+  <!-- K.Y / 50代女性 -->
+  <div class="card" data-age="50">
+    <div class="card-header">
+      <div class="profile">
+        <div class="avatar-circle"><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><circle cx="12" cy="7.5" r="4" fill="#c4a0c8"/><path d="M4 21c0-4.4 3.6-8 8-8s8 3.6 8 8z" fill="#c4a0c8"/></svg></div>
+        <div>
+          <div class="profile-name">K.Y さん</div>
+          <div class="profile-attr">50代・女性</div>
+        </div>
+      </div>
+      <div class="stars">★★★★★</div>
+    </div>
+    <div class="sep"></div>
+    <div class="big-quote">"</div>
+    <p class="highlight-text">直接話が出来て良かったです。</p>
+    <p class="body-text">質問して納得できたので良かったです。Zoomでしたが、直接話ができて安心しました。</p>
+  </div>
+
+</div>
+
+<!-- CTA -->
+<div class="cta-section">
+  <div class="cta-inner">
+    <p class="cta-eyebrow">Next Step</p>
+    <h2>あなたも体験してみませんか？</h2>
+    <p>詳細はLINEからご確認いただけます。</p>
+    <a href="https://lin.ee/" class="cta-btn">セッションを申し込む</a>
+  </div>
+</div>
+
+<footer>
+  © aityan_loa &nbsp;|&nbsp; お客様の声はご本人の許可を得て掲載しています
+</footer>
+
+<script>
+  function filter(age, btn) {
+    document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    document.querySelectorAll('.card').forEach(card => {
+      if (age === 'all' || card.dataset.age === age) {
+        card.classList.remove('hidden');
+      } else {
+        card.classList.add('hidden');
+      }
+    });
+  }
+
+  function toggleDetail(btn) {
+    const detail = btn.nextElementSibling;
+    const isOpen = !detail.classList.contains('hidden');
+    if (isOpen) {
+      detail.classList.add('hidden');
+      btn.classList.remove('open');
+    } else {
+      detail.classList.remove('hidden');
+      btn.classList.add('open');
+    }
+  }
+</script>
+
+</body>
+</html>
